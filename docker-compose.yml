@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./frontend/src/frontend
+      dockerfile: ./Dockerfile
+    image: frontend
+    restart: unless-stopped
+    environment:
+      BACKEND_HOST: backend 
+      BACKEND_PORT: 8080
+    ports:
+      - "8000:8000"
+    networks:
+      - lab-network
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend/src/backend
+      dockerfile: ./Dockerfile
+    image: backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - lab-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  lab-network:
+    driver: bridge
