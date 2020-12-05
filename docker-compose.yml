@@ -25,14 +25,21 @@ services:
 
   backend:
     build:
-      context: ./backend/src/backend
+      context: ./backend
       dockerfile: ./Dockerfile
     image: backend
     restart: unless-stopped
+    environment:
+      BACKEND_DB_NAME: database 
+      BACKEND_DB_ADDRESS: mysql:3306
+      BACKEND_DB_PASSWORD: user_pass
+      BACKEND_DB_USERNAME: user
     ports:
       - "8080:8080"
     networks:
       - lab-network
+    depends_on:
+      - mysql 
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
       interval: 10s
@@ -40,6 +47,30 @@ services:
       retries: 3
       start_period: 10s
 
+  mysql:
+    image: mysql:8.0.22@sha256:c8414a9528a0fff5dd44d7c9260e570258dc09c2548766400cd5cfc4dd384991
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - "mysql_data:/var/lib/mysql"
+    networks:
+      - lab-network
+    healthcheck:
+      test: mysqladmin ping --silent
+      timeout: 10s
+      interval: 10s
+      retries: 5
+  
 networks:
   lab-network:
     driver: bridge
+
+volumes:
+  mysql_data:
