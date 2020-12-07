@@ -2,14 +2,14 @@ package main
 
 import (
 	"context"
-	"net/http"
 
 	"backend/internal/config"
 	"backend/internal/healthz"
-	"backend/internal/metric"
 	"backend/internal/users"
 
+	"github.com/chenjiandongx/ginprom"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/spf13/viper"
 )
 
@@ -38,13 +38,14 @@ func main() {
 	users.Migrate(&env)
 
 	router := gin.Default()
-
+	router.Use(ginprom.PromMiddleware(nil))
+	router.GET("/metrics", ginprom.PromHandler(promhttp.Handler()))
 	users.UsersHandler(&env, router)
 	healthz.HealthzHandler(&env, router)
-	metric.MetricsHandler(&env, router)
 
 	log.Info("Starting backend")
-
-	http.ListenAndServe(":8080", router)
-
+	err := router.Run(":8080")
+	if err != nil {
+		env.Log.Fatal(err)
+	}
 }
