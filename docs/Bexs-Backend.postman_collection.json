@@ -23,31 +23,13 @@
 			"response": []
 		},
 		{
-			"name": "Users{id}",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/users/1",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"users",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Users",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"elton\",\r\n    \"email\": \"elton@elton.com\"\r\n}"
+					"raw": "{\r\n    \"username\": \"porto1\",\r\n    \"full_name\":\"elton\",\r\n    \"email\": \"elton@elton.com\"\r\n}"
 				},
 				"url": {
 					"raw": "{{url}}/users",
@@ -67,13 +49,100 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/users/1",
+					"raw": "{{url}}/users/300",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"users",
-						"1"
+						"300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"15\",\r\n    \"username\":\"eaaa\",\r\n    \"full_name\":\"b\",\r\n    \"email\": \"elton@elton.com\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Healthz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/healthz",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"healthz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users?username=",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/users?username=el7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "el7"
+						}
 					]
 				}
 			},

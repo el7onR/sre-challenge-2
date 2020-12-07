@@ -1,4 +1,4 @@
-package durable
+package config
 
 import (
 	"context"
@@ -17,14 +17,12 @@ type ConnectionInfo struct {
 	DBName   string
 }
 
-//OpenDatabaseClient opens a connection to the database
-func OpenDatabaseClient(ctx context.Context, c *ConnectionInfo) (*gorm.DB, error) {
+func Database(ctx context.Context, c *ConnectionInfo) *gorm.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?tls=skip-verify&charset=utf8&parseTime=true", c.Username, c.Password, c.Address, c.DBName)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
-		return nil, err
+		return nil
 	}
-
-	return db, nil
+	return db
 }
