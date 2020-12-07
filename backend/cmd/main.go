@@ -6,6 +6,7 @@ import (
 
 	"backend/internal/config"
 	"backend/internal/healthz"
+	"backend/internal/metric"
 	"backend/internal/users"
 
 	"github.com/gin-gonic/gin"
@@ -40,6 +41,7 @@ func main() {
 
 	users.UsersHandler(&env, router)
 	healthz.HealthzHandler(&env, router)
+	metric.MetricsHandler(&env, router)
 
 	log.Info("Starting backend")
 
