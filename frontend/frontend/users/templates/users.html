@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+        <div class="content">
+            <h2 class="content-subhead">Cadastro de Usuários</h2>
+            <form class="pure-form" method="POST" action="users">
+                <fieldset>
+                    <input type="text" placeholder="Nome Completo" name="full_name" />
+                    <input type="text" placeholder="Username" name="username"/>
+                    <input type="email" placeholder="Email" name="email" />
+                </fieldset>
+                <button type="submit" class="pure-button pure-button-primary">Criar</button>
+            </form>
+        </div>
+        <div class="content">            
+            <h2 class="content-subhead">Lista Usuários Cadastrados</h2>
+                {% for value in result.content %}
+                    <p>
+                        {{ value.username }}
+                    </p>
+                {% endfor %}
+        </div>
+{% endblock %}
+
+

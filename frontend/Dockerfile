@@ -6,4 +6,4 @@ WORKDIR /app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN apk --no-cache add curl
-ENTRYPOINT ["python", "./frontend.py"]
+ENTRYPOINT ["python", "./app.py"]

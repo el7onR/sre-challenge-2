@@ -1,0 +1,5 @@
+body { font-family: sans-serif; font-size: 20px; background: #eee; padding: 20px}
+
+div{align: center; }
+div.success{background-color: green; color: #fff; padding: 8px;}
+div.fail{background-color: red; color: #fff;padding: 8px;}
