@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="content">
+        <h2 class="content-subhead">Serviço Indisponível</h2>
+        {% if error is not none %}
+            <p>Detalhes: {{ error.content }} </p>
+        {% endif %}
+{% endblock %}

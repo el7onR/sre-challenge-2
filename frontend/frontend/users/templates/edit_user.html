@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="content">
+        <h2 class="content-subhead">Atualização de Usuários</h2>
+        <form class="pure-form pure-form-stacked" method="POST" action="{{ url_for('users_bp.update_user') }}">
+            <fieldset>
+                <label for="full_name">Nome Completo</label>
+                <input id="full_name" type="text" placeholder="Nome Completo" name="full_name" value='{{ user.full_name }}' />
+                <label for="username">Username</label>
+                <input id="username" type="text" placeholder="Username" name="username" value='{{ user.username }}'/>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="Email" name="email" value='{{ user.email }}'/>
+                <input type="hidden" name="id" value="{{ user.id }}">
+            </fieldset>
+            <button type="submit" class="pure-button pure-button-primary">Alterar</button>
+        </form>
+        {% if error is not none %}
+            {% if error.status_code != 200 %}
+                <p>Erro ao Alterar usuário, detalhes {{ error.content }}</p>
+            {% endif %} 
+        {% endif %}
+        <a href="{{ url_for('users_bp.users')}}" class="pure-button pure-button-primary">Voltar</a>
+    </div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask
 from .home import home
 from .users import users
+from .healthz import healthz
 
 def create_app(config:str):
     app = Flask(__name__)
@@ -9,5 +10,6 @@ def create_app(config:str):
     with app.app_context():
         app.register_blueprint(users.users_bp) 
         app.register_blueprint(home.home_bp) 
+        app.register_blueprint(healthz.healthz_bp) 
 
     return app
