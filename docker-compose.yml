@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       context: ./frontend/
-      dockerfile: ./Dockerfile
+      dockerfile: ./dev.Dockerfile
     image: frontend
     restart: unless-stopped
     environment:
@@ -17,6 +17,8 @@ services:
       - lab-network
     depends_on:
       - backend
+    volumes:
+      - "./frontend/:/app"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
       interval: 10s
@@ -27,7 +29,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: ./Dockerfile
+      dockerfile: ./dev.Dockerfile
     image: backend
     restart: unless-stopped
     environment:
@@ -40,7 +42,9 @@ services:
     networks:
       - lab-network
     depends_on:
-      - mysql 
+      - mysql
+    volumes:
+      - "./backend/:/app"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
       interval: 10s
