@@ -5,5 +5,4 @@ EXPOSE 8000
 WORKDIR /app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
-RUN apk --no-cache add curl
-ENTRYPOINT ["gunicorn", "-b", ":8000", "wsgi:app", "-w", "1"]
+ENTRYPOINT ["gunicorn", "-b", ":8000", "wsgi:app", "--reload", "-w", "1"]

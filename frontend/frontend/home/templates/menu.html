@@ -8,8 +8,8 @@
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
-            <li class="pure-menu-item"><a href="users" class="pure-menu-link">Usuários</a></li>
-            <li class="pure-menu-item"><a href="contact" class="pure-menu-link">Contato</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('users_bp.users') }}" class="pure-menu-link">Usuários</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('home_bp.contact') }}" class="pure-menu-link">Contato</a></li>
         </ul>
     </div>
 </div>

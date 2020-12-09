@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="content">
+        <h2 class="content-subhead">Cadastro de Usuários</h2>
+        <form class="pure-form" method="POST" action="{{ url_for('users_bp.create_user') }}">
+            <fieldset>
+                <input  type="text" placeholder="Nome Completo" name="full_name" />
+                <input  type="text" placeholder="Username" name="username"/>
+                <input  type="email" placeholder="Email" name="email" />
+            </fieldset>
+            <button type="submit" class="pure-button pure-button-primary">Criar</button>
+        </form>
+        {% if new_user is not none %}
+            {% if new_user.status_code != 201 %}
+                <p>Erro ao criar usuário, detalhes {{ new_user.content }}</p>
+            {% endif %} 
+            {% if new_user.status_code == 201 %}
+                <p>Usuário criado com sucesso</p>
+                <table class="pure-table">
+                    <thead>
+                        <tr pure-table-odd>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            <tr class="pure-table-odd">
+                                <td>{{ new_user.content.id }}</td>
+                                <td>{{ new_user.content.username }}</td>
+                                <td>{{ new_user.content.full_name }}</td>
+                                <td>{{ new_user.content.email }}</td>
+                            </tr>
+                        </tbody>
+                </table>
+            {% endif %} 
+        {% endif %}
+        <a href="{{ url_for('users_bp.users')}}" class="pure-button pure-button-primary">Voltar</a>
+    </div>
+{% endblock %}

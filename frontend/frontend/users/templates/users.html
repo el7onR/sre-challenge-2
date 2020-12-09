@@ -2,23 +2,50 @@
 
 {% block content %}
         <div class="content">
-            <h2 class="content-subhead">Cadastro de Usuários</h2>
-            <form class="pure-form" method="POST" action="users">
-                <fieldset>
-                    <input type="text" placeholder="Nome Completo" name="full_name" />
-                    <input type="text" placeholder="Username" name="username"/>
-                    <input type="email" placeholder="Email" name="email" />
-                </fieldset>
-                <button type="submit" class="pure-button pure-button-primary">Criar</button>
-            </form>
+            <h2 class="content-subhead">Ações</h2>
+                <a href="{{ url_for('users_bp.create_user')}}" class="pure-button pure-button-primary">Novo Usuário</a>
         </div>
         <div class="content">            
             <h2 class="content-subhead">Lista Usuários Cadastrados</h2>
-                {% for value in result.content %}
-                    <p>
-                        {{ value.username }}
-                    </p>
-                {% endfor %}
+            {% if users is not none %}
+                {% if users.status_code != 200 %}
+                    <p>Nenhum usuário encontrado</p>
+                {% endif %}
+                {% if users.status_code == 200 %}
+                <table class="pure-table pure-table-horizontal" >
+                    <thead>
+                        <tr pure-table-odd>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users.content %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.full_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <form class="pure-form" method="POST" action="{{ url_for('users_bp.delete_user') }}" rel="nofollow">
+                                    <input type="hidden" name="id" value="{{ user.id }}">
+                                    <button type="submit" class="pure-button pure-button-primary">Excluir</button>
+                                </form>
+                                <form class="pure-form" method="POST" action="{{ url_for('users_bp.edit_user') }}" rel="nofollow">
+                                    <input type="hidden" name="user" value="{{ user }}">
+                                    <button type="submit" class="pure-button pure-button-primary">Alterar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                        
+                {% endif %}
+            {% endif %}
         </div>
 {% endblock %}
 
