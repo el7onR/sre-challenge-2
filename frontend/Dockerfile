@@ -6,4 +6,4 @@ WORKDIR /app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN apk --no-cache add curl
-ENTRYPOINT ["gunicorn", "-b", ":8000", "wsgi:app", "-w", "1"]
+ENTRYPOINT ["gunicorn", "-b", ":8000", "wsgi:app", "-w", "4", "-t", "30", "--threads", "4"]

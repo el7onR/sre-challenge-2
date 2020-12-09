@@ -4,11 +4,14 @@
 {% block content %}
     <div class="content">
         <h2 class="content-subhead">Cadastro de Usuários</h2>
-        <form class="pure-form" method="POST" action="{{ url_for('users_bp.create_user') }}">
+        <form class="pure-form pure-form-stacked" method="POST" action="{{ url_for('users_bp.create_user') }}">
             <fieldset>
-                <input  type="text" placeholder="Nome Completo" name="full_name" />
-                <input  type="text" placeholder="Username" name="username"/>
-                <input  type="email" placeholder="Email" name="email" />
+                <label for="full_name">Nome Completo</label>
+                <input  id="full_name" type="text" placeholder="Nome Completo" name="full_name"/>
+                <label for="username">Username</label>
+                <input  id="username" type="text" placeholder="Username" name="username"/>
+                <label for="email">Email</label>
+                <input  id="email" type="email" placeholder="Email" name="email"/>
             </fieldset>
             <button type="submit" class="pure-button pure-button-primary">Criar</button>
         </form>

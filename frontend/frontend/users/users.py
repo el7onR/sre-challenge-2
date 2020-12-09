@@ -42,9 +42,14 @@ def create_user():
             error=result["content"]
     )
     
-    return render_template(
-        'new_user.html',
-        new_user=result)
+    if result["status_code"] != 201:
+
+        return render_template(
+            'new_user.html',
+            new_user=result,
+        )
+
+    return redirect(url_for('users_bp.users'))
 
 
 @users_bp.route('/users/delete', methods=['POST'])
