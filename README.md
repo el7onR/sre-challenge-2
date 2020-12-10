@@ -50,9 +50,9 @@ O projeto consiste de 3 componentes, sendo:
 ## Como Utilizar
 
 Como executar o stack localmente
-### Docker Compose
+### Docker Compose - **Preferencial**
 
-O stack possui o arquivo docker-compose.yml na raiz do projeto. O script possui mapeamento para os arquivos dev.Dockerfile de cada componente. Para executar o docker compose, é necessário possuir o docker e docker-compose instalado no computador, além de conexão à internet 
+O stack possui o arquivo docker-compose.yml na raiz do projeto. O script possui mapeamento para os arquivos dev.Dockerfile de cada componente. Para executar o docker compose, é necessário possuir o docker e docker-compose instalado no computador, além de conexão à internet
 
 Testes foram realizados em ambiente **Linux Ubuntu 20.04**, utilizando as versões **docker-compose 1.27.4** e **docker 19.03.13**.
 
@@ -60,9 +60,9 @@ Testes foram realizados em ambiente **Linux Ubuntu 20.04**, utilizando as versõ
 
 Comandos (devem ser executados na raiz do projeto)
 
-* Para subir a stack em background: `docker-compose up --build -d`
+* Para subir a stack em background: `docker-compose up --build -d` 
 * Para subir a stack na console: `docker-compose up --build`
-* Para verificar o status da stack: `docker-compose ps`
+* Para verificar o status da stack: `docker-compose ps` **<- liberado para acesso quando todos os containers estverem healthy**
 * Para parar a stack sem remover o conteúdo: `docker-compose stop`
 * Para iniciar a stack: `docker-compose start`
 * Para remover a stack e apagar os volumes e networks: `docker-compose down --remove -v`
@@ -95,7 +95,8 @@ Dentro da pasta frontend, executar:
 `python3 -m venv .venv`
 `source .venv/bin/activate`
 `pip3 install -r requirements.txt`
-`gunicorn -b :8000 wsgi:app --reload -w 4 --access-logfile - -t 30 --threads 4 --log-level debug`
+`export prometheus_multiproc_dir=/tmp`
+`gunicorn -c gunicorn_config.py wsgi:app --reload -w 4 --log-level debug`
 
 ## Bonus
 
