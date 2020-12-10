@@ -80,23 +80,27 @@ As varíaveis default da stack já estão apontando para os endereços e portas,
 
 Iniciar o MySQL
 
-`docker run --name mysql -e MYSQL_ROOT_PASSWORD=root_pass -p 3306:3306 -e MYSQL_DATABASE=database --rm -d mysql`
+* `docker run --name mysql -e MYSQL_ROOT_PASSWORD=root_pass -p 3306:3306 -e MYSQL_DATABASE=database --rm -d mysql`
 
 Iniciar o Backend
 
 Dentro da pasta backend, executar:
 
-`go run cmd/main.go`
+* `go run cmd/main.go`
 
 Iniciar o Frontend
 
 Dentro da pasta frontend, executar:
 
-`python3 -m venv .venv`
-`source .venv/bin/activate`
-`pip3 install -r requirements.txt`
-`export prometheus_multiproc_dir=/tmp`
-`gunicorn -c gunicorn_config.py wsgi:app --reload -w 4 --log-level debug`
+* `python3 -m venv .venv`
+
+* `source .venv/bin/activate`
+
+* `pip3 install -r requirements.txt`
+
+* `export prometheus_multiproc_dir=/tmp`
+
+* `gunicorn -c gunicorn_config.py wsgi:app --reload -w 4 --log-level debug`
 
 ## Bonus
 
