@@ -4,3 +4,4 @@ __pycache__
 backend/main
 backend/backend
 backend/build
+.vscode
