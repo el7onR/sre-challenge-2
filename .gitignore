@@ -1,6 +1,6 @@
 *.db
-env
-backend.bin
-backend
 .venv
 __pycache__
+backend/main
+backend/backend
+backend/build

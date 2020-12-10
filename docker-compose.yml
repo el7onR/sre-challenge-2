@@ -13,6 +13,7 @@ services:
       FRONTEND_LOGGING_LEVEL: DEBUG
     ports:
       - "8000:8000"
+      - "8001:8001"
     networks:
       - lab-network
     depends_on:

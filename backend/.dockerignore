@@ -2,3 +2,5 @@ Dockerfile
 README.md
 backend.db
 backend
+main
+build

@@ -27,7 +27,7 @@ O projeto consiste de 3 componentes, sendo:
 * Porta de exposição: 8000/TCP
 * Healthcheck URL: <http://localhost:8000/healthz>
 * Base URL: <http://localhost:8000/>
-* Observability: Logging + Metrics (Prometheus)
+* Metrics: <http://localhost:8001/metrics>
 
 ### Backend
 
@@ -39,7 +39,8 @@ O projeto consiste de 3 componentes, sendo:
 * Porta de exposição: 8080/TCP
 * Healthcheck URL: <http://localhost:8080/healthz>
 * Base URL: <http://localhost:8080/>
-* Observability: Logging + Metrics (Prometheus)
+* Metrics: <http://localhost:8080/metrics>
+* Postman: Folder postman possui um export do Postman utilizado pra testar o backend
 
 ### MySQL
 
@@ -127,3 +128,35 @@ Melhorias e ajustes adicionados ao código das aplicações de frontend e backen
 * Ajuste no comportamento de criação do usuário para não considerar ID ao criar novo usuário e utilizar o ID do banco.
 * Novas variáveis para conexão ao banco de dados.
 
+## TODO
+
+### Observability
+
+* Instrumentalizar tracing no frontend e no backend
+* Adicionar Prometheus no docker-compose e configurar para monitorar frontend e backend
+* Adicionar Grafana no docker-compose e configurar com dashs do frontend e backend
+* Configurar Jaeger no docker-compose.
+* Adicionar stack do ELK para capturar os logs das aplicações
+
+### Testes
+
+* Adicionar testes unitários e integrados no frontend e no backend
+* Adicionar testes de carga do frontend e backend
+
+### Aplicação Backend
+
+* Adicionar documentação do swagger para as apis
+* Ajustar os paths para versionamento
+* Adicionar validações no middleware
+* Adicionar caching para consultas ao banco
+
+### Aplicação Frontend
+
+* Adicionar caching para consultas ao backend
+* Novas validações nos formulários
+
+
+### Geral
+
+* Facilitar setup local com makefile
+* Adicionar documentação de cleanup

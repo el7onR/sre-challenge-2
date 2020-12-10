@@ -6,4 +6,6 @@ WORKDIR /app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN apk --no-cache add curl
-ENTRYPOINT ["gunicorn", "-b", ":8000", "wsgi:app", "-w", "4", "-t", "30", "--threads", "4"]
+ENV prometheus_multiproc_dir /tmp
+ENV METRICS_PORT 9200 
+ENTRYPOINT ["gunicorn", "-c", "gunicorn_config.py", "wsgi:app", "--log-level", "info"]

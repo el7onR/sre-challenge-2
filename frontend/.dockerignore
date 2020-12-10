@@ -1,2 +1,6 @@
 Dockerfile
 README.md
+dev.Dockerfile
+tmp
+__pycache__
+.venv
